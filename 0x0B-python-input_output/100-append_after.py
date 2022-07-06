@@ -1,27 +1,15 @@
 #!/usr/bin/python3
-"""Module 100-append_after.
-Inserts a line of text to a file,
-after each line containing a specific string.
-"""
-
-
 def append_after(filename="", search_string="", new_string=""):
-    """Appends the new_string after
-    the search_string in filename.
-
-    Args:
-        - filename: name of the file
-        - search_string: string to append after
-        - new_string: new_string to append
-    """
-
-    with open(filename, "r") as f:
+    with open(filename, mode='r', encoding='utf-8') as f:
         text = f.readlines()
+        new_text = []
 
-    with open(filename, "w") as fo:
-        s = ""
         for line in text:
-            s += line
+            new_text.append(line)
+
             if search_string in line:
-                s += new_string
-        fo.write(s)
+                new_text.append(new_string)
+
+    with open(filename, mode='w', encoding='utf-8') as nf:
+        for line in new_text:
+            nf.write(line)
